@@ -41,6 +41,7 @@ urlpatterns = [
     path("api/v1/", include("apps.accounts.urls")),
     path("api/v1/", include("apps.areas.urls")),
     path("api/v1/", include("apps.tasks.urls")),
+    path("api/v1/", include("apps.submission.urls")),
 ]+swagger_urlpatterns+token_urlpatterns
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
