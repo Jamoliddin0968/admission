@@ -1,10 +1,10 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import ContactInfoViewSet
+from .views import ContactInfoViewSet, PassportInfoViewSet
 
 router = DefaultRouter()
 router.register(r'contactinfo', ContactInfoViewSet, basename='contactinfo')
-
+router.register(r'passportinfo', PassportInfoViewSet, basename='passportinfo')
 urlpatterns = [
-    path('api/v1/', include(router.urls)),
+    path('', include(router.urls)),
 ]
