@@ -1,15 +1,18 @@
 from django.db import models
 from apps.accounts.models import User
+from apps.areas.models import EducationalArea
 
 
 class GenderChoices(models.TextChoices):
     male = ('M', 'Male')
     female = ('F', 'Female')
 
+
 class AppStatusChoices(models.TextChoices):
     accepted = ('accepted', 'ACCEPTED')
     checking = ('checking', 'CHECKING')
     rejected = ('rejected', 'REJECTED')
+
 
 class PassportInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -33,5 +36,5 @@ class ContactInfo(models.Model):
 
 
 class Application(models.Model):
-    faculty = models.ForeignKey(Faculty)
+    faculty = models.ForeignKey(EducationalArea, on_delete=models.CASCADE)
     status = models.CharField(max_length=8, choices=AppStatusChoices.choices)
