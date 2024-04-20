@@ -43,7 +43,8 @@ INSTALLED_APPS = [
 
     'apps.accounts',
     'apps.areas',
-    "apps.submissions"
+    "apps.submission",
+    "apps.tasks"
 ]
 
 MIDDLEWARE = [
