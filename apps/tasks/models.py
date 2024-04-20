@@ -17,8 +17,7 @@ class Task(models.Model):
 class Answer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     datetime = models.DateTimeField(auto_now_add=True)
-    file = models.FileField(upload_to='answers/',
-                            validators=[validate_pdf_extension])
+    file = models.FileField(upload_to='answers/')
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     def __str__(self):
