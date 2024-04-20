@@ -1,4 +1,5 @@
 # serializers.py
+from apps.submission.serializers import ContactInfoSerializer
 from rest_framework import exceptions, serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -6,9 +7,11 @@ from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
+    contactinfo = ContactInfoSerializer()
+
     class Meta:
         model = User
-        fields = ['id', 'email']
+        fields = ['id', 'email', 'contactinfo']
 
 
 class RegistrationSerializer(serializers.Serializer):

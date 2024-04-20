@@ -1,6 +1,7 @@
 from django.db import models
 
 from apps.accounts.models import User
+from apps.areas.models import EducationalArea
 
 
 class GenderChoices(models.TextChoices):
@@ -26,7 +27,8 @@ class PassportInfo(models.Model):
 
 
 class ContactInfo(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='contactinfo')
     phone_number = models.CharField(max_length=20)
     country = models.CharField(max_length=64)
     state = models.CharField(max_length=64)
