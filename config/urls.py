@@ -10,8 +10,8 @@ from rest_framework_simplejwt.views import (TokenObtainPairView,
 
 token_urlpatterns = [
 
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
 ]
 schema_view = get_schema_view(
@@ -43,4 +43,4 @@ urlpatterns = [
     path("api/v1/", include("apps.tasks.urls")),
 ]+swagger_urlpatterns+token_urlpatterns
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

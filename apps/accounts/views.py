@@ -1,3 +1,5 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, GenericAPIView
 from rest_framework.permissions import IsAuthenticated
@@ -10,10 +12,12 @@ from .models import OtpCode, User
 from .utils import generate_otp, send_mail
 
 
+# @method_decorator(csrf_exempt, name='dispatch')
 class RegisterAPIView(CreateAPIView):
     serializer_class = RegistrationSerializer
 
     def perform_create(self, serializer):
+
         otp_code = generate_otp()
         email = serializer.validated_data.get("email")
         password = serializer.validated_data.get("password")
