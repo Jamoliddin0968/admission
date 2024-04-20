@@ -29,6 +29,7 @@ params = {
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+
 response = requests.get(
     'https://new.cooperation.uz/ocelot/api-client/Client/GetAllOffer',
     params=params,

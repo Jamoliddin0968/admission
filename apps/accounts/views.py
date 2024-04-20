@@ -62,4 +62,5 @@ class CheckUserStatusView(GenericAPIView):
     def get(self, request):
         user = request.user
         is_verified = user.is_verified
-        return Response({'is_verified': is_verified})
+        role = user.role
+        return Response({'is_verified': is_verified, "role": role})

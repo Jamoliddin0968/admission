@@ -35,6 +35,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
 
+    ROLE_CHOICES = (
+        ('teacher', 'Teacher'),
+        ('student', 'Student'),
+        ('manager', 'Manager'),
+    )
+    role = models.CharField(
+        max_length=20, choices=ROLE_CHOICES, default='student')
+
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'

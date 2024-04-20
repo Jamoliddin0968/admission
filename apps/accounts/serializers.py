@@ -13,11 +13,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 class RegistrationSerializer(serializers.Serializer):
     email = serializers.EmailField()
-    password = serializers.CharField(min_length=8)
+    password = serializers.CharField(min_length=6)
 
 
 class OtpCodeSerializer(serializers.Serializer):
     email = serializers.EmailField()
-    otp_code = serializers.CharField(min_length=6)
+    otp_code = serializers.CharField(min_length=4)
 
 # serializers.py
