@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     'apps.accounts',
-    'apps.areas'
+    'apps.areas',
+    "apps.submissions"
 ]
 
 MIDDLEWARE = [
