@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .serializers import ContactInfoSerializer, PassportInfoSerializer
 from .models import PassportInfo, ContactInfo
+
 class ContactInfoViewSet(viewsets.ModelViewSet):
     queryset = ContactInfo.objects.all()
     serializer_class = ContactInfoSerializer
