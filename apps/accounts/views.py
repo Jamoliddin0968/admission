@@ -1,16 +1,12 @@
-import uuid
-
-from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, GenericAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenObtainPairView
 
 from apps.accounts.serializers import OtpCodeSerializer, RegistrationSerializer
 
-from .models import OtpCode
-from .serializers import CustomTokenObtainPairSerializer
+from .models import OtpCode, User
 from .utils import generate_otp, send_mail
 
 
@@ -18,18 +14,14 @@ class RegisterAPIView(CreateAPIView):
     serializer_class = RegistrationSerializer
 
     def perform_create(self, serializer):
-        # Generate OTP code
         otp_code = generate_otp()
-        username = str(uuid.uuid4())
         email = serializer.validated_data.get("email")
         password = serializer.validated_data.get("password")
         user, _ = User.objects.get_or_create(email=email)
-        user.username = username
         user.set_password(password)
         user.save()
         OtpCode.objects.create(user=user, otp_code=otp_code)
         send_mail(user.email, otp_code)
-        print(User.objects.count())
         return Response({"message": "ok"})
 
 
@@ -63,8 +55,11 @@ class VerifyEmailAPIView(GenericAPIView):
         except OtpCode.DoesNotExist:
             return Response({'error': 'OTP code not found'}, status=status.HTTP_400_BAD_REQUEST)
 
-# views.py
 
+class CheckUserStatusView(GenericAPIView):
+    permission_classes = [IsAuthenticated,]
 
-class CustomTokenObtainPairView(TokenObtainPairView):
-    serializer_class = CustomTokenObtainPairSerializer
+    def get(self, request):
+        user = request.user
+        is_verified = user.is_verified
+        return Response({'is_verified': is_verified})
